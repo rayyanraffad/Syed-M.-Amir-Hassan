@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "Syed Amir - SEO Expert Website"
+version = "1.0.0"
+id = "artifacts/syed-amir-seo"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19279
+
+[services.development]
+run = "pnpm --filter @workspace/syed-amir-seo run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/syed-amir-seo", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/syed-amir-seo/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19279"
+BASE_PATH = "/"
